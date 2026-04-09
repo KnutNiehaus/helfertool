@@ -222,7 +222,7 @@ def edit_helper(request, event_url_name, helper_pk):
 @never_cache
 @archived_not_available
 def add_helper(request, event_url_name, shift_pk):
-    event, job, shift, helper = get_or_404(event_url_name, shift_pk=shift_pk)
+    event, _job, shift, helper = get_or_404(event_url_name, shift_pk=shift_pk)
 
     # check permission
     if not has_access(request.user, shift.job, ACCESS_JOB_EDIT_HELPERS):
@@ -258,7 +258,7 @@ def add_helper(request, event_url_name, shift_pk):
         if not helper.send_mail(request, internal=True):
             messages.error(request, _("Sending the mail failed, but the helper was saved."))
 
-        return redirect("helpers_for_job", event_url_name=event_url_name, job_pk=job.pk)
+        return redirect("helpers_for_job", event_url_name=event_url_name, job_pk=shift.job.pk)
 
     # render page
     context = {"event": event, "form": form}
