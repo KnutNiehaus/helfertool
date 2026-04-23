@@ -3,4 +3,8 @@ line-length = 120
 target-version = ["py39"]
 
 [tool.poetry]
+name = "helfertool"
+version = "0.1.0"
+description = "test"
+authors = ["Your Name <you@example.com>"]
 
