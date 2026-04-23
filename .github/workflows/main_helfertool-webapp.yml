@@ -62,5 +62,7 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: 'Helfertool-WebApp'
-          slot-name: 'Production'
+          #slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_78731F9455514788B7F42A32AEEEBB3B }}
+          package: '.'
+          startup-command: ''
