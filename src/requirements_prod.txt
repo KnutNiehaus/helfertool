@@ -1,3 +1,8 @@
 # packages pinned to compatible version
 mysqlclient~=2.2.7
 psycopg~=3.3.2
+Django
+gunicorn  # Replace uWSGI for Azure App Service
+celery
+psycopg2-binary  # For PostgreSQL
+python-dotenv
