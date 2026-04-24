@@ -88,4 +88,4 @@ jobs:
           #slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_78731F9455514788B7F42A32AEEEBB3B }}
           package: '.'
-          startup-command: 'gunicorn --chdir src helfertool.wsgi:application --bind 0.0.0.0:8000 --workers 4'
+          #startup-command: 'gunicorn --chdir src helfertool.wsgi:application --bind 0.0.0.0:8000 --workers 4'
