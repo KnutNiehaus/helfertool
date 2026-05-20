@@ -23,6 +23,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      
       - name: Install system dependencies
         run: |
           sudo apt-get update
@@ -55,7 +56,6 @@ jobs:
           DJANGO_SETTINGS_MODULE: helfertool.settings
           HELFERTOOL_CONFIG_FILE: /dev/null
                 
-      # By default, when you enable GitHub CI/CD integration through the Azure portal, the platform automatically sets the SCM_DO_BUILD_DURING_DEPLOYMENT application setting to true. This triggers the use of Oryx, a build engine that handles application compilation and dependency installation (e.g., pip install) directly on the platform during deployment. Hence, we exclude the antenv virtual environment directory from the deployment artifact to reduce the payload size.
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
         with:
@@ -63,12 +63,6 @@ jobs:
           path: |
             .
             !antenv/
-
-      # 🚫 Opting Out of Oryx Build
-      # If you prefer to disable the Oryx build process during deployment, follow these steps:
-      # 1. Remove the SCM_DO_BUILD_DURING_DEPLOYMENT app setting from your Azure App Service Environment variables.
-      # 2. Refer to sample workflows for alternative deployment strategies: https://github.com/Azure/actions-workflow-samples/tree/master/AppService
-      
 
   deploy:
     runs-on: ubuntu-latest
@@ -85,7 +79,5 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: 'Helfertool-WebApp'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_HELFERTOOL }}
           #slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_78731F9455514788B7F42A32AEEEBB3B }}
-          package: '.'
-          #startup-command: 'gunicorn --chdir src helfertool.wsgi:application --bind 0.0.0.0:8000 --workers 4'
