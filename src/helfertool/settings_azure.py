@@ -54,11 +54,13 @@ TMP_ROOT = Path("/tmp/helfertool")
 TMP_ROOT.mkdir(parents=True, exist_ok=True)
 
 # Celery configuration for Azure
-CELERY_BROKER_URL = os.getenv(
-    "CELERY_BROKER_URL",
-    "amqp://guest:guest@127.0.0.1:5672//"
-)
-CELERY_RESULT_BACKEND = "django-db"
+# CELERY_BROKER_URL = os.getenv(
+#    "CELERY_BROKER_URL",
+#    "amqp://guest:guest@127.0.0.1:5672//"
+#)
+# CELERY_RESULT_BACKEND = "django-db"
+CELERY_TASK_ALWAYS_EAGER = True
+CELERY_TASK_EAGER_PROPAGATES = True
 
 # Caching - use Azure Cache for Redis (optional)
 if os.getenv("REDIS_URL"):
